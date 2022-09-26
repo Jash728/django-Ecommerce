@@ -1,0 +1,64 @@
+{% extends 'app/base.html' %} {% load static %} 
+{% block title %}Login {% endblock title %} 
+{% block main-content %}
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-6 offset-sm-3">
+      <h3>Login</h3>
+      <hr />
+      <form name="myForm" onsubmit="validateForm(event)" action="" method="post" novalidate class="shadow p-5" Required>
+        {% csrf_token %} {% for fm in form %}
+        <div class="form-group">
+          {{fm.label_tag}} {{fm}}
+          <small class="text-danger" id="err{{fm.name}}"> {{ fm.errors|striptags}}</small><br />
+        </div>
+        {% endfor %}
+        <small><a href="{% url 'password_reset' %}">Forgot Password ?</a></small
+        ><br />
+        <input type="submit" class="btn btn-primary mt-4" value="Login" />
+        <br />
+        <div class="text-center text-primary fw-bold">
+          <small
+            >New to JashKart ?
+            <a href="{% url 'signup' %}" class="text-danger"
+              >Create an Account</a
+            ></small
+          >
+        </div>
+        {% for message in messages %}
+
+        <div class="alert alert-danger">
+          <a class="close" href="#" data-dismiss="alert"></a>
+          {{ message }}
+        </div>
+
+        {% endfor %}
+       
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  function validateForm(event) {
+    var x = document.forms["myForm"]["username"].value;
+    var y = document.forms["myForm"]["password"].value;
+    let errorCount = 0
+    if (x == "") {
+      document.getElementById('errusername').innerHTML = 'Username required';
+      errorCount++
+    }
+
+    if (y == "") {
+      document.getElementById('errpassword').innerHTML = 'Password required';
+      errorCount++
+    }
+
+    if (errorCount) {
+      event.preventDefault(); 
+    }
+
+    return errorCount > 0 ? false : true
+  }
+</script>
+
+{% endblock main-content %}

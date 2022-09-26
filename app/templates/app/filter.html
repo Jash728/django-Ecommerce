@@ -1,0 +1,45 @@
+{% load static %}
+{% comment %} {{catlist.minMaxPrice}} {% endcomment %}
+<script type="text/javascript" src="{% static 'app/js/product-filter.js' %}"></script>
+{% comment %} <script type="text/javascript" src="{% static 'app/js/product-fil.js' %}"></script> {% endcomment %}
+<h3 class="mb-4 border-bottom pb-1">Filters</h3>
+
+<div class="card mb-4">
+    <h6 class="card-header">Brands</h6>
+    <div class="list-group list-group-flush">
+        {% for product in catlist.products %}
+       
+            {% ifchanged product.brand.name %}
+          
+                <li class="list-group-item">
+                    <input class="filter-checkbox" data-filter="brand" value="{{product.brand.id}}" type="checkbox" />&nbsp;
+                    {{product.brand.name}}
+                </li></a>
+            {% endifchanged %}
+        {% endfor %}
+       
+     
+    </div>
+</div>
+
+<div class="card mb-4">
+    <h6 class="card-header">Price</h6>
+    <div class="list-group list-group-flush">
+        
+        <li class="list-group-item">
+            <input type="range"  value="{{catlist.minMaxPrice.discounted_price__min}}" max={{catlist.minMaxPrice.discounted_price__max}} min={{catlist.minMaxPrice.discounted_price__min}} id="rangeInput" oninput="maxPrice.value=this.value" />   
+            <p>{{catlist.minMaxPrice.discounted_price__min}}-{{catlist.minMaxPrice.discounted_price__max}}</p>
+        </li>
+        <li class="list-group-item">
+            Max: <input type="number" value="{{catlist.minMaxPrice.discounted_price__min}}" max={{catlist.minMaxPrice.discounted_price__max}} min={{catlist.minMaxPrice.discounted_price__min}} class="form-control" id="maxPrice" onkeyup="rangeInput.value=this.value" id="maxPrice" />
+            <button id="priceFilterBtn" class="btn btn-info btn-sm mt-1">Filter</button>
+        </li>
+    </div>
+</div>
+
+
+
+
+
+
+{% comment %} <a href="http://127.0.0.1:8000/category/{{catlist.cat}}/" class="list-group-item list-group-item-action">All Products</a> {% endcomment %}

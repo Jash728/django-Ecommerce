@@ -1,0 +1,80 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Editing Profile of {{user.username|capfirst}}{% endblock title %}
+
+{% block main-content %}
+<div class="container">
+    <form ction="{% url "profile" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p style="color:red; margin-top: 5px;" id="errMsg"></p>
+        <p style="color:red; margin-top: 5px;" id="errMsguname"></p>
+       
+        <table>
+            {{ form.as_table }}
+            {{ profile_form.as_table }}
+        </table>
+        <button type="submit" id="btnRegister" class="btn btn-primary mt-3">Update</button>
+    </form>
+    <br>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("ul.errorlist").each(function(index){
+            console.log(index)
+            $(this).appendTo($(this).parent());
+        });
+    });
+
+    // validation for email
+    function validateEmail(value) {
+        const re = /^([a-z])([\w_]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+        return re.test(value);
+    }
+
+    // Validation for username
+    function validateUname(value){
+        const re = /^[a-z][a-z0-9]{2,30}$/;
+        return re.test(value);
+    }
+
+        
+        
+        // Validate function
+    function validate(field_name, value) {
+
+            // Initialization
+        document.getElementById('btnRegister').disabled = false
+        let errCount = 0
+
+        // Username Validation
+        if(field_name == 'username'){
+            let uname_err_msg = '';
+            if(!validateUname(value)){
+                uname_err_msg = "Username should have only lowercase character and only digits";
+                errCount = errCount + 1;
+            }
+            $('#errMsguname').html(uname_err_msg)
+        }
+
+        // Email validation
+        if (field_name == 'email') {
+            var email_err_msg = '';
+            if (!validateEmail(value)) {
+                console.log("Invalid Email");
+                email_err_msg = 'Email address should be in lowercase and in correct format';
+                errCount = errCount + 1;
+            }
+            $('#errMsg').html(email_err_msg)
+        }
+        if (errCount > 0) {
+                document.getElementById('btnRegister').disabled = true
+            }
+
+            return
+    }
+  
+   
+    
+</script>
+
+{% endblock main-content%}

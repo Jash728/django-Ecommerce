@@ -1,0 +1,146 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block banner_slider %}
+
+
+<!--Banner Slider-->
+ <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    {% for img in slider_items %}
+    <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+      <img src="{{img.slider_image.url}}" class="d-block w-100" alt="..." height="600px"> 
+    </div>
+    {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+<!-- End Banner Slider -->
+{% endblock banner_slider %}
+
+{% block livesale %}
+<!-- Live Sale Section -->
+<div class="container">
+  <div class="row bg-danger text-center p-5 text-white border-bottom shadow">
+    <h1>SALE IS LIVE NOW</h1>
+    <span>5% Instant Discount on Axis Bank Credit and Debit Card</span>
+    <small class="fw-lighter">Term and Condition Applied (For details visit Bank's official Website)</small>
+  </div>
+</div> 
+<!-- End Live Sale Section -->
+{% endblock livesale %}
+
+{% block main-content %}
+<!-- 1st Product Slider -->
+{% comment %} <div class="m-3">
+ <h2>JashKart Bottom Wears</h2>
+ <!-- Slider 1 -->
+ {% for catagory in categorie %}
+  <div class="owl-carousel" id="slider1">
+  
+    {% if catagory.p %}
+      {% for p in catagory.p %}
+        <a href="{% url 'product-detail' p.id %}" class="btn"><div class="item"><img src="{{p.product_img.url}}" 
+        alt="" height="200px"><span class="fw-bold">{{p.title}}</span><br><span class="fs-5">{{p.discounted_price}}</span></div></a>
+      {% endfor %}
+    {% endif %}
+    </div>
+  {% endfor %}
+</div> {% endcomment %}
+<!-- End 1st Product Slider -->
+
+<!-- Payment Info Section -->
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="card mb-3">
+     <div class="card-body">
+     <img src="{% static 'app/images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid">
+     </div>
+   </div>
+  </div>
+  <div class="col-sm-3">
+   <div class="card mb-3">
+     <div class="card-body">
+      <img src="{% static 'app/images/payavail/upi.jpg' %}" alt="" srcset="" class="img-fluid">
+     </div>
+   </div>
+  </div>
+  <div class="col-sm-3">
+   <div class="card mb-3">
+     <div class="card-body">
+      <img src="{% static 'app/images/payavail/nb.jpg' %}" alt="" srcset="" class="img-fluid">
+     </div>
+   </div>
+  </div>
+  <div class="col-sm-3">
+   <div class="card mb-3">
+     <div class="card-body">
+      <img src="{% static 'app/images/payavail/bj.jpg' %}" alt="" srcset="" class="img-fluid">
+     </div>
+   </div>
+  </div>
+ </div>
+</div>
+<!-- End Payment Info Section -->
+
+<!-- 2nd Product Slider -->
+{% comment %} <div class="mx-3">
+ <h2>JashKart Top Wear</h2>
+ <!-- Slider 2 -->
+ <div class="owl-carousel" id="slider2">
+  {% for t in topwears %}
+  <a href="{% url 'product-detail' t.id %}" class="btn"><div class="item"><img src="{{t.product_img.url}}" 
+    alt="" height="200px"><span class="fw-bold">{{t.title}}</span><br><span class="fs-5">{{t.discounted_price}}</span></div></a>
+  {% endfor %}
+ </div>
+</div>
+<div class="mx-3">
+  <h2>JashKart Mobile</h2>
+  <!-- Slider 2 -->
+  <div class="owl-carousel" id="slider2">
+   {% for m in mobiles %}
+   <a href="{% url 'product-detail' m.id %}" class="btn"><div class="item"><img src="{{m.product_img.url}}" 
+     alt="" height="200px"><span class="fw-bold">{{m.title}}</span><br><span class="fs-5">{{m.discounted_price}}</span></div></a>
+   {% endfor %}
+  </div>
+ </div> {% endcomment %}
+
+ 
+ <div class="mx-3">
+  {% for catagory in dashboard_categories %}
+  <h2>JashKart {{catagory.name}}</h2>
+    <div class="owl-carousel" id="slider1">
+      {% if catagory.products %}
+        {% for product in catagory.products %}
+        
+          <a href="{% url 'product-detail' product.id %}" class="btn">
+            <div class="item">
+              <img src="{{product.product_img.url}}" alt="" height="200px" />
+              <span class="fw-bold">{{product.title}}</span><br>
+              <span class="fs-5">${{product.discounted_price}}</span>
+            </div>
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+ 
+<!-- End 2nd Product Slider -->
+{% endblock main-content %}
+

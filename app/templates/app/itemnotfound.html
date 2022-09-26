@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %} {% load static %} {% block main-content %}
+
+
+<main class="container my-4">
+  <h3 class="my-4 border-bottom pb-1">
+    <span class="text-muted">Search result for</span>
+    {{request.GET.search|capfirst}}
+  </h3>
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="error-template">
+            {% comment %} <h1>Oops!</h1> {% endcomment %}
+            <h2>Item Not Found</h2>
+            <div class="error-details">
+              Sorry, We can't find the item related your Search!
+            </div>
+            <div class="error-actions">
+            <a
+                href={% url 'home' %}
+                class="btn btn-primary btn-sm mx-7 my-2 "
+                ><span class="glyphicon glyphicon-home"></span> Take Me Home </a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock main-content %}

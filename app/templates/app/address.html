@@ -1,0 +1,67 @@
+{% extends 'app/base.html' %} {% load static %} {% block title %}Address of{{user.username}}{% endblock title %} {% block main-content %}
+
+<style>
+    .testimonial-group>.row {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .testimonial-group>.row>.card {
+        display: inline-block;
+        float: none;
+    }
+    /* Decorations */
+    
+    .card {
+        color: black;
+        font-size: 18px;
+        padding-bottom: 2px;
+        padding-top: 5px;
+    }
+    
+    .card:nth-child(2n+1) {
+        background: #F0F0F0
+    }
+    
+    .card:nth-child(2n+2) {
+        background: #F0F0F0
+    }
+</style>
+
+<main class="container my-4">
+    <!-- Featured Products -->
+    <center>
+        <h3 class="my-4 border-bottom pb-1">
+            {{user.username|capfirst}} Addresses
+        </h3>
+    </center>
+    <center>
+        <div class="container">
+
+
+            <div class="container testimonial-group">
+                <div class="row text-center">
+                    <center>
+                        <div class="col-md-6 mb-4">
+                            {% for ad in add %}
+
+                            <div class="card shadow">
+                                <h3>Address {{forloop.counter}}</h3>
+                                <p>Name: {{ad.name}}</p>
+                                <p>Locality: {{ad.locality}}</p>
+                                <p>City: {{ad.city}}</p>
+                                <p>State: {{ad.state}}</p>
+                                <p>Pincode: {{ad.zipcode}}</p>
+                            </div>
+                            <hr> {% endfor %}
+
+                            <div class="col-xs-4"><a href="{% url 'addr' %}" class="float-right btn  outline btn-sm btn-primary"><i
+            class="fa fa-plus"></i>Add New Address</a></div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div </center>
+</main>
+
+{% endblock main-content %}

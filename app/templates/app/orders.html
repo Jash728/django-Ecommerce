@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Orders of {{user.username|capfirst}}{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome {{user.username|capfirst}}</h3>
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'orders' %}" class="btn btn-primary">Orders</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+    {% for op in order_placed %}
+    <div class="row shadow-sm mb-3">
+        <div class="col-sm-2">
+            <img src="{{op.product.product_img.url}}" alt="" srcset="" class="img-fluid" height="150" width="150">
+        </div>
+        <div class="col-sm-7">
+            <p>Product : {{op.product.title}}</p>
+            <p>Quantity : {{op.quantity}}</p>
+            <p>Price: {{op.total_cost}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="text-end">
+      <!-- <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> -->
+      <a href="{% url 'order_confirmation' %}" class="btn btn-warning mt-3 px-5 fw-bold">Continue</a>
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

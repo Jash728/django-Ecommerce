@@ -1,0 +1,47 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} Empty Cart {% endblock title %}
+{% block main-content %}
+  <!-- <div class="container my-5">
+    <div class="row">
+        <h3 class="text-center">
+            You have no products in the cart
+        </h3>
+        <div class="text-center">
+            <img src="{% static 'app/images/emptycart.png' %}" alt="" class="img-fluid img-thumbnail w-25">
+        </div>
+        <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+            <a href="{% url 'home' %}" class="btn btn-success" type="submit" id="header-links">
+              Go to store page 
+            </a>
+        </div>
+    </div>
+  </div> -->
+  <div class="container-fluid  mt-100">
+    <div class="row">
+    
+       <div class="col-md-12">
+       
+               <div class="card">
+           <div class="card-header">
+           <h5>Cart</h5>
+           </div>
+           <div class="card-body cart">
+                   <div class="col-sm-12 empty-cart-cls text-center">
+                       <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                       <h3><strong>Your Cart is Empty</strong></h3>
+                       <h4>Add something to make me happy :)</h4>
+                       <a href="{% url 'home' %}" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                       
+                   
+                   </div>
+           </div>
+   </div>
+           
+       
+       </div>
+    
+    </div>
+   
+   </div>
+{% endblock main-content %}

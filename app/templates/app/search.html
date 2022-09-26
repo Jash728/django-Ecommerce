@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block main-content %}
+<main class="container my-4">
+	<h3 class="my-4 border-bottom pb-1"><span class="text-muted">Search result for</span> {{request.GET.search|capfirst}}</h3>
+	<div class="row">
+    {% for product in data %}
+		
+		<div class="col-md-3 mb-4">
+			<div class="card shadow">
+			  <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.product_img}}" class="card-img-top" alt="{{product.title}}"></a>
+			  <div class="card-body">
+			    <center><h6 class="card-text" style="font-size: 30px;">{{product.title}}</h6>
+                    <br>
+                <h6 class="card-title" >Price : <span id="pricepr{{product.id}}">{{product.discounted_price}}</span><small class="fw-light text-decoration-line-through">       {{product.selling_price}}</small></h6></center>
+                                
+			  </div>
+              <div class="d-flex">
+				
+				{% if request.user.is_authenticated %}
+				{% if item_is_already_in_cart %}
+				<a href="{% url 'showcart' %}" class="btn btn-warning shadow px-5 py-2 ms-4">Go to Cart</a>
+				{% else %}
+                <form action="/add-to-cart" class="d-inline">
+					
+                    <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+                    <button  type="submit" class="btn btn-primary shadow px-3 py-2" style="margin-left: 30px; margin-bottom: 15px">Add to cart</button>
+                </form>
+				{% endif %}
+				{% endif %}
+                <a href="{% url 'checkout' %}" class="btn btn-danger shadow px-4 py-2" style="margin-left: 15px; margin-bottom: 15px">Buy Now</a>
+				
+		      </div>
+			  </div>
+			</div>
+		</div>
+    {% endfor %}
+	</div>
+</main>
+{% endblock main-content %}

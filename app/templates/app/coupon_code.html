@@ -1,0 +1,210 @@
+{% extends 'app/base.html' %} {% load static %} {% block title %}Coupon Codes of
+{{user.username}}{% endblock title %} {% block main-content %}
+
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Amarante");
+
+  html,
+  body,
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  embed,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  output,
+  ruby,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #eee url("https://i.imgur.com/eeQeRmk.png"); /* https://subtlepatterns.com/weave/ */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  ::selection {
+    background: #5f74a0;
+    color: #fff;
+  }
+  ::-moz-selection {
+    background: #5f74a0;
+    color: #fff;
+  }
+  ::-webkit-selection {
+    background: #5f74a0;
+    color: #fff;
+  }
+
+  br {
+    display: block;
+    line-height: 1.6em;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  h1 {
+    font-family: "Amarante", Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 2.6em;
+    line-height: 1.7em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /** page structure **/
+  #wrapper {
+    display: block;
+    width: 950px;
+    background: #fff;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px 17px;
+    -webkit-box-shadow: 2px 2px 3px -1px rgba(0, 0, 0, 0.35);
+  }
+
+  #keywords {
+    margin: 0 auto;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  #keywords thead {
+    cursor: pointer;
+    background: #c9dff0;
+  }
+  #keywords thead tr th {
+    font-weight: bold;
+    padding: 12px 30px;
+    padding-left: 42px;
+  }
+  #keywords thead tr th span {
+    padding-right: 20px;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+  }
+
+  #keywords tbody tr {
+    color: #555;
+  }
+
+  #keywords tbody tr td {
+    text-align: center;
+    padding: 15px 10px;
+  }
+</style>
+<html>
+  <body>
+    <div id="wrapper">
+      <h1>Available coupon codes</h1>
+
+      <table id="keywords" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Discount Amount</th>
+            <th>Minimum Bill Price</th>
+            <th>Expiry Status</th>
+          </tr>
+        </thead>
+        {% for c in coupon_codes %}
+        <tbody>
+          <tr>
+            <td class="lalign"><center>{{forloop.counter}}</center></td>
+            <td>{{c.code}}</td>
+            <td>{{c.discount}}</td>
+            <td>{{c.minimum_amount}}</td>
+            <td>{{c.is_expired}}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>
+{% endblock main-content %}
